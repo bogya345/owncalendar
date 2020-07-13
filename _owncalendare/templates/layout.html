@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}Default title{% endblock title %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="https://freeiconshop.com/wp-content/uploads/edd/calendar-flat.png" width="30" height="30"
+                class="d-inline-block align-top" alt="">
+            OwnCalendare
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                {% if active == "profile" %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                {% endif %}
+
+                {% if active == "diary" %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/diary">Diary</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/diary">Diary</a>
+                </li>
+                {% endif %}
+
+                {% if active == "loads" %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/loads">Loads</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/loads">Loads</a>
+                </li>
+                {% endif %}
+                
+            </ul>
+        </div>
+
+    </nav>
+
+    <h1>{% block header %}{% endblock header %}</h1>
+
+    <div>{% block content %}{% endblock content %}</div>
+
+    <div>{% block mainpart %} Loading... {% endblock mainpart %}</div>
+
+    <div>
+        Footer
+        <p>Николька - молодец</p>
+    </div>
+</body>
+
+</html>
