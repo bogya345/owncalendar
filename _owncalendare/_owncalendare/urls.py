@@ -20,7 +20,11 @@ urlpatterns = [
     # admins urls
     path('admin/', admin.site.urls),
 
-    #users urls
+    # default authtarization
+    path('', include('authapp.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    # users urls
     path('profile/', include('profileapp.urls')),
     path('diary/', include('diaryapp.urls')),
 ]
