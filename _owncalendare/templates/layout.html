@@ -9,29 +9,42 @@
     <title>{% block title %}Default title{% endblock title %}</title>
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static './styles/layout.css' %}">
+    <!-- <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 
+    <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-md-center justify-content-start">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand d-inline" href="">
             <img src="https://freeiconshop.com/wp-content/uploads/edd/calendar-flat.png" width="30" height="30"
                 class="d-inline-block align-top" alt="">
             OwnCalendare
         </a>
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="nav-link" href="#_"><i class="fa fa-search mr-1"></i></a>
+
+        <div class="navbar-collapse collapse justify-content-between align-items-center" id="collapsingNavbar2">
+
+            <ul class="navbar-nav ">
 
                 {% if active == "profile" %}
                 <li class="nav-item active">
@@ -64,9 +77,23 @@
                 {% endif %}
 
             </ul>
+
+            <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Log In</a>
+                </li>
+                {% endif %}
+            </ul>
+
         </div>
 
     </nav>
+
 
     <h1>{% block header %}{% endblock header %}</h1>
 
@@ -74,10 +101,63 @@
 
     <div>{% block mainpart %} Loading... {% endblock mainpart %}</div>
 
-    <div>
+    <div class="">
         Footer
         <p>Николька - молодец</p>
     </div>
+
+    <footer id="footer" class="footer-1">
+        <div class="main-footer widgets-dark typo-light">
+
+            <div class="container justify-content-center">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="widget subscribe no-box">
+                            <h5 class="widget-title">Source project<span></span></h5>
+                            <a href="https://github.com/bogya345/owncalendar">Source link</a>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="widget no-box">
+                            <h5 class="widget-title">Sign up for free<span></span></h5>
+                            <p>Some motivation phrase</p>
+                            <a class="btn" href="/register/" target="blank" style="background-color: rgba(108, 228, 150, 0.6);">Register Now</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-5">
+                        <div class="widget no-box">
+                            <h5 class="widget-title">Contacts<span></span></h5>
+                            <ul class="social-footer2">
+                                <li style="margin-bottom: 1em;">
+                                    <bold>Support:</bold>
+                                    <a href="vk.com/qazwsxedcrfvtgby16">Bogdan Volkov</a>
+                                </li>
+                                <li style="margin-bottom: 1em;">
+                                    <bold>Creater:</bold>
+                                    <a href="vk.com/qazwsxedcrfvtgby16">Bogdan Volkov</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>Bogdan Volkov © 2020</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 
 </html>

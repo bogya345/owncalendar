@@ -1,9 +1,10 @@
 from django.http import HttpResponseRedirect, QueryDict
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 
 from django.contrib.auth.models import User
+
 
 from django import forms
 class LoginForm(forms.Form):
@@ -35,8 +36,11 @@ class RegisterForm(forms.Form):
 # Create your views here.
 
 def index(request):
-    form = LoginForm()
-    return render(request, 'authapp/index.html', { 'form': form } )
+    if request.user.is_authenticated:
+        return redirect('/profile/')
+    else:
+        form = LoginForm()
+        return render(request, 'authapp/index.html', { 'form': form } )
 
 def register(request):
     if request.method == 'POST':
@@ -82,9 +86,10 @@ def login(request):
         else:
             return "Incorrect login and password"
 
-def logout(request):
+def logoutUser(request):
     if request.user.is_authenticated:
         # close session
+        logout(request)
         return render(request, 'authapp/mainview.html')
     else:
         return render(request, 'authapp/mainview.html')
